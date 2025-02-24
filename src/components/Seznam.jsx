@@ -7,17 +7,16 @@ const Seznam = () => {
     const [text, setText] = useState('');
     const [newData, setNewData] = useState(data);
 
+    // Zjistí jestli title obsahuje zadany text
     useEffect(() => {
-        setNewData(
-            data.filter(({ title }) => {
-                return title.includes(text);
-            })
-        );
+        setNewData(data.filter(({ title }) => title.toLowerCase().includes(text.toLowerCase())));
     }, [text]);
 
     return (
         <div className='seznam'>
-            <input type='text' value={text} onChange={(e) => setText(e.target.value)} placeholder='Hledaný film' />
+            <form action=''>
+                <input type='text' value={text} onChange={(e) => setText(e.target.value)} placeholder='Hledaný film' />
+            </form>
             <div className='film-container'>
                 {newData.map((data) => {
                     return <OneCard key={data.id} {...data} />;
